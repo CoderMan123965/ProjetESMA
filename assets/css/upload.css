@@ -1,0 +1,115 @@
+/* --- Reset basique --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Fond gris très clair pour faire ressortir la carte */
+   /* display: flex; */
+   /* justify-content: center; */
+   /* align-items: center; */
+    min-height: 100vh;
+    color: #333;
+}
+
+/* --- Style de la carte de formulaire --- */
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); /* Ombre douce */
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+}
+
+h2 {
+    color: #2e4a57;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+}
+
+/* --- Style du champ d'upload (effet Dropzone) --- */
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 2px dashed #b0c4de;
+    border-radius: 8px;
+    background-color: #f9fbfc;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Changement de couleur au survol pour montrer que c'est cliquable */
+input[type="file"]:hover {
+    border-color: #2b6a76;
+    background-color: #f1f6f8;
+}
+
+/* Personnalisation du bouton "Parcourir" intégré au navigateur */
+input[type="file"]::file-selector-button {
+    background-color: #e2e8f0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #333333;
+    cursor: pointer;
+    margin-right: 15px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: #cbd5e1;
+}
+
+/* --- Style du bouton de soumission --- */
+button[type="submit"] {
+    background-color: #2b6a76;
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #f3410b;
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98); /* Petit effet de clic */
+}
+
+
+#section-upload {
+    max-width: 600px;
+    margin: 0 auto; /* Centre le formulaire uniquement dans la zone blanche */
+    padding: 20px;
+    text-align: center;
+}
+
+#section-upload h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
