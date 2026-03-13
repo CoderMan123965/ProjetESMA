@@ -7,7 +7,7 @@ if(isset($_FILES["fichier"])){
     $nomFichier = $_FILES["fichier"]["name"];
     $tmpFichier = $_FILES["fichier"]["tmp_name"];
 
-    // Dossier de destination (créé s'il n'existe pas)
+    // Ici c'est pour le dossier de destination (à créé s'il n'existe pas)
     $dossier = realpath(__DIR__ . "/..") . DIRECTORY_SEPARATOR . "doc";
     if (!is_dir($dossier)) {
         mkdir($dossier, 0777, true);

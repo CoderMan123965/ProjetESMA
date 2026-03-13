@@ -73,13 +73,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
     }
 }
 
-// Statistiques globales
+// ICI c'est pour les statistiques globaux
 $totalEtudiants   = (int) $pdo->query("SELECT COUNT(*) FROM etudiant")->fetchColumn();
 $totalAdmis       = (int) $pdo->query("SELECT COUNT(*) FROM etudiant WHERE moyenne >= 10")->fetchColumn();
 $moyenneGlobale   = (float) $pdo->query("SELECT AVG(moyenne) FROM etudiant WHERE moyenne IS NOT NULL")->fetchColumn();
 $tauxReussite     = $totalEtudiants > 0 ? round($totalAdmis * 100 / $totalEtudiants, 1) : 0;
 
-// Statistiques sur les fichiers (imports)
+// ICI c'est pour les statistiques sur les fichiers (imports)
 $sql = "SELECT f.id_fichier, f.nom_fichier, COUNT(e.id_etudiant) AS nb_etudiants
         FROM fichiers f
         LEFT JOIN etudiant e ON e.id_fichier = f.id_fichier
@@ -117,41 +117,6 @@ $admins = $adminsStmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <div class="admin-layout" id="top">
-        <!-- Sidebar -->
-        <aside class="admin-sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">
-                    <img src="../assets/images/logo-esma.png" alt="Logo ESMA">
-                </div>
-                <div class="sidebar-brand">
-                    <span class="brand-name">ESMA</span>
-                    <span class="brand-sub">Results Admin</span>
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="#section-dashboard" class="nav-item active" data-target="section-dashboard">
-                    <i class="fa-solid fa-gauge"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#section-etudiants" class="nav-item" data-target="section-etudiants">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Étudiants</span>
-                </a>
-                <a href="#section-settings" class="nav-item" data-target="section-settings">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>Paramètres</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-footer">
-                <a href="../auth/logout.php" class="logout-link">
-                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                    <span>Déconnexion</span>
-                </a>
-            </div>
-        </aside>
-
         <!-- Contenu principal -->
         <main class="admin-main">
             <!-- Topbar -->
@@ -471,19 +436,41 @@ $admins = $adminsStmt->fetchAll(PDO::FETCH_ASSOC);
         </main>
     </div>
 
+    <!-- Tab bar type iPhone en bas -->
+    <div class="admin-tabbar">
+        <div class="admin-tabbar-inner">
+            <a href="#section-dashboard" class="tab-item active" data-target="section-dashboard">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#section-etudiants" class="tab-item" data-target="section-etudiants">
+                <i class="fa-solid fa-users"></i>
+                <span>Étudiants</span>
+            </a>
+            <a href="#section-settings" class="tab-item" data-target="section-settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Paramètres</span>
+            </a>
+            <a href="../auth/logout.php" class="tab-item">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Déconnexion</span>
+            </a>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Navigation latérale : bascule de "pages"
+        // Navigation par tab bar : bascule de "pages"
         const pages = document.querySelectorAll('.section-page');
 
-        document.querySelectorAll('.sidebar-nav .nav-item').forEach(link => {
+        document.querySelectorAll('.admin-tabbar .tab-item[data-target]').forEach(link => {
             link.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('data-target');
-                if (!targetId) return;
+                if (!targetId) return; // bouton Quitter
                 e.preventDefault();
 
-                // état actif du menu
-                document.querySelectorAll('.sidebar-nav .nav-item').forEach(l => l.classList.remove('active'));
+                // état actif sur la tab bar
+                document.querySelectorAll('.admin-tabbar .tab-item').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
 
                 // affichage / masquage des pages
